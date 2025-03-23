@@ -27,12 +27,12 @@ This repository hosts a Python-based simulator for the board game **Settlers of 
 
 1. **Clone the Repository:**
    ```bash
-   git clone https://github.com/yourusername/PyCatanSimulation.git
-   cd PyCatanSimulation
+   git clone https://github.com/brivaro/GeneticAlgorithmPyCatan
+   cd GeneticAlgorithmPyCatan
    ```
 
 2. **Install Dependencies:**  
-   Create a virtual environment (optional but recommended) and install the required packages:
+   Create a virtual environment (optional but recommended) and install the required packages (you can use conda):
    ```bash
    python -m venv venv
    source venv/bin/activate    # On macOS/Linux
@@ -41,7 +41,7 @@ This repository hosts a Python-based simulator for the board game **Settlers of 
    ```
 
 3. **Requirements File:**  
-   Your `requirements.txt` should include the following dependencies:
+   Your `requirements.txt` should include the following:
    ```txt
    deap==1.3.1
    numpy==1.23.5
@@ -89,6 +89,51 @@ This repository hosts a Python-based simulator for the board game **Settlers of 
 
 ---
 
+## 📝 Optimization Report
+
+**Informe sobre la Optimización de Agentes en Catan con Algoritmos Genéticos**
+
+1. **Código fuente del algoritmo genético y scripts de pruebas**  
+   El código implementa un algoritmo genético para optimizar la selección de agentes en el juego de Catan. Utiliza la biblioteca DEAP para la evolución de individuos, donde cada individuo representa una distribución de probabilidades sobre los agentes. Se simulan partidas y se evalúa la frecuencia de victorias del agente optimizado para determinar su fitness.
+
+2. **Logbook o registro de resultados**  
+   Se ha registrado la evolución del fitness a lo largo de las generaciones en el archivo `evolution_log.csv`, que contiene los siguientes datos por generación:
+
+   | Generación | Evaluaciones | Fitness Promedio | Fitness Mínimo | Fitness Máximo |
+   |------------|--------------|------------------|----------------|----------------|
+   | 0          | 50           | 4                | 1              | 8              |
+   | 1          | 40           | 5.4              | 3              | 8              |
+   | 2          | 41           | 5.8              | 3              | 9              |
+   | 3          | 33           | 6.1              | 4              | 9              |
+   | 4          | 38           | 6.0              | 4              | 8              |
+   | 5          | 47           | 5.9              | 4              | 9              |
+
+   El tiempo total de ejecución del algoritmo fue de **680.53 segundos**.
+
+3. **Mejor individuo encontrado**  
+   El mejor individuo encontrado tiene la siguiente distribución de probabilidades normalizada para la selección de agentes:
+
+   > [0.1123, 0.0850, 0.1073, 0.1483, 0.0052, 0.0771, 0.1052, 0.1767, 0.1075, 0.0753]
+
+   Este individuo obtuvo un fitness de **9 victorias en 10 simulaciones**, lo que sugiere que tiene una alta tasa de éxito en las partidas.
+
+4. **Explicación de los hiperparámetros y su impacto en el rendimiento**
+
+   | Hiperparámetro                              | Valor | Impacto                                                                 |
+   |---------------------------------------------|-------|-------------------------------------------------------------------------|
+   | POP_SIZE (Tamaño de población)              | 50    | Un tamaño moderado permite diversidad sin un costo computacional excesivo. |
+   | N_GEN (Número de generaciones)              | 5     | Aumentar este valor podría permitir más refinamiento, pero con mayor costo de tiempo. |
+   | CXPB (Probabilidad de cruce)                | 0.8   | Un valor alto fomenta la exploración de combinaciones, evitando el estancamiento. |
+   | MUTPB (Probabilidad de mutación)            | 0.2   | Introduce variabilidad para evitar convergencia prematura.               |
+   | N_SIM (Número de simulaciones por evaluación de fitness) | 10    | Un número bajo acelera la ejecución, pero puede generar más ruido en la evaluación.  |
+
+**Conclusión:**  
+El algoritmo encontró una solución óptima en "relativamente poco tiempo" (en mi PC de 9 años), alcanzando **9 victorias en 10 simulaciones**. Incrementar el número de generaciones o partidas simuladas podría afinar aún más la optimización, aunque con un mayor costo computacional.
+
+Adjunto código fuente (`catan.py`) y el logbook (`evolution_log.csv`) a la entrega.
+
+---
+
 ## 🤝 Contributing
 
 Contributions to enhance the simulation, add new agents, or improve the genetic algorithm are welcome! Feel free to fork the repository and submit pull requests with your improvements.
@@ -97,6 +142,8 @@ Contributions to enhance the simulation, add new agents, or improve the genetic 
 
 Happy simulating and evolving your Catan strategies! 🚀
 
+
+---
 ---
 ---
 
